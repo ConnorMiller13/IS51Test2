@@ -13,6 +13,12 @@ import { ToastService } from '../toast/toast.service';
 export class TestScoreComponent implements OnInit {
 
   tests: Array<any> = [];
+  testName: string;
+  pointsPossible: number;
+  pointsReceived: number;
+  percentage: number;
+  grade: string;
+
   constructor(
     private http: Http,
     private activatedRoute: ActivatedRoute,
@@ -21,7 +27,12 @@ export class TestScoreComponent implements OnInit {
   ) { }
 
   async ngOnInit() {
+    this.tests = await this.loadTestsFromJson();
+  }
 
+  loadTestsFromJson() {
+    const tests =  this.http.get('assets/tests.json');
+    return tests.json();
   }
 
 }

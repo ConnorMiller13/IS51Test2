@@ -11,12 +11,20 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
+      <tr *ngFor='let test-score of test-score; let i = index'>
+        <td *ngIf="!test-score.editing" scope = "row"> {{ test-score.id }}</td>
+        <td *ngIf="!test-score.editing"> {{ test-score.totalPointsPossible }}</td>
+        <td *ngIf="!test-score.editing"> {{ test-score.totalPointsReceived }} </td>
+        <td *ngIf="!test-score.editing"> {{ test-score.totalPercentage }}</td>
+        <td *ngIf="!test-score.editing"> {{ test-score.finalGrade }}
+          <button class="btn btn-danger my-2 my-sm-0 tests-button" (click)="deleteTest(i)">
+            X
+          </button>
+        </td>
+        <td  *ngIf="test-score.editing" scope="row"> 
+          <input [(ngModel)]="test-score.id" type="number" class="form-control" id="exampleInputTest" aria-describedby="Test" placeholder="">  
+          </input>
+        </td>
       </tr>
     </tbody>
   </table>
